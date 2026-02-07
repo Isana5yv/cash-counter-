@@ -1,5 +1,13 @@
 <?php
+session_start();
 include 'service/database.php';
+
+$id_users = $_SESSION['id_users'];
+$query = $db->prepare("SELECT anggota FROM daftar_anggota WHERE id_users = ?");
+$query->bind_param("i", $id_users);
+$query->execute();
+
+$result = $query->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -32,34 +40,30 @@ include 'service/database.php';
 <body>
     <?php include 'layout/header.html' ?>
     <h2>mulai kas hari ini?</h2>
-    <button type="button" id="mulai">mulai!</button>
-    <table>
+    <form action="page.php" method="post">
+    <table style="border: 1px solid black;">
         <tr>
             <th>no.</th>
             <th>nama</th>
-            <th>tanggal</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>isa</td>
-            <td><input type="checkbox" name="sudah" id="sudah"></td>
+            <th>kas berapa</th>
         </tr>
         <tbody>
+            <?php 
+            $no = 1;
+            while ($row = $result->fetch_assoc()) {
+                echo "<tr>
+                <td>".$no++."</td>
+                <td>".$row['anggota']."</td>
+                <td><input type='number' name='kas_".$no."'></td>
+                </tr>";
+            }
+            ?>
         </tbody>
     </table>
 
-    <script>
-        const mulai = document.getElementById('mulai');
-        const wadah = document.getElementById('table-container');
+    <button type="submit" name="simpan">simpan</button>
+    </form>
 
-        mulai.addEventListener('click', function(){
-            const table = document.createElement('table');
-            table.innerHTML =
-            '<tr> <th>no.</th> <th>nama</th> <th>tanggal</th></tr>'
-        })
-    </script>
-
-    <?php include 'layout/riwayat.php' ;
-     include 'layout/footer.html' ?>
+    <?php include 'layout/footer.html' ?>
 </body>
 </html>

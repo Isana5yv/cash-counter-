@@ -119,6 +119,11 @@ if (!isset($_SESSION['id_users'])) {
         </div>
     </section>
 
+    <section class="go_to_rutinan">
+        <h2>mau mulai kas hari ini?</h2>
+        <a href="rutinan.php"><button type="button">mulai!</button></a>
+    </section>
+
     <section class="quotes">
         <i>"barang siapa yang barangnya membawa barang"</i>
     </section>

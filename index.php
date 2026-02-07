@@ -88,7 +88,7 @@ if(isset($_POST['login'])){
                 <br>
                 <button name="login" type="submit">login</button>
             </form>
-            <p><a href="page.php">belum punya akun?daftar disini</a></p>
+            <p><a href="loginkas.php">belum punya akun?daftar disini</a></p>
         </div>
     </div>
 

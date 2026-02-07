@@ -101,6 +101,34 @@ if (isset($_POST['simpan'])) {
 <?php } ?>
 </table>
 
+<!--tabel menampilkan anggota di guru !-->
+
+
+$id_guru = $_SESSION['id_guru'];
+
+$query = $conn->prepare(
+    "SELECT nama_murid FROM murid WHERE id_guru = ?"
+);
+$query->bind_param("i", $id_guru);
+$query->execute();
+
+$result = $query->get_result();
+
+<table border="1">
+    <tr>
+        <th>No</th>
+        <th>Nama Murid</th>
+    </tr>
+
+<?php $no = 1; ?>
+<?php while ($row = $result->fetch_assoc()): ?>
+    <tr>
+        <td><?= $no++ ?></td>
+        <td><?= $row['nama_murid'] ?></td>
+    </tr>
+<?php endwhile; ?>
+</table>
+
 
 </body>
 
