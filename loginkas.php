@@ -1,9 +1,15 @@
 <?php
 session_start();
+
+var_dump($_POST);
 include "service/database.php";
 
 if(!isset($_SESSION['step'])) {
     $_SESSION['step'] = 1;
+} else {
+    if($_SESSION['step'] > 2) {
+        $_SESSION['step'] = 1;
+    }
 }
 $step = $_SESSION['step'];
 if(isset($_POST['submit1'])){
@@ -148,7 +154,7 @@ if(isset($_POST['submit'])){
             </form>
 
         <?php elseif($step == 2): ?>
-            <form action="index.php" method="post" id="form2">
+            <form action="loginkas.php" method="post" id="form2">
 
                 <fieldset>
                     <label>keperluan pribadi/kelompok</label><br>
