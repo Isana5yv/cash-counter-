@@ -1,7 +1,17 @@
 <?php 
 
+$id_users = $_SESSION['id_users'];
+
+ $stmt2 = $db->prepare("SELECT kas_masuk, kas_keluar, kas_total, keterangan_users, tanggal 
+ FROM uang_kelompok 
+ WHERE id_users = ?
+ ORDER BY id_tanggal DESC");
+
+ $stmt2->bind_param("i", $id_users);
+ $stmt2->execute();
+ $result2 = $stmt2->get_result();
+
 if(isset($_POST['operasi'])){
-    $id_users = $_SESSION['id_users'];
     $masuk = empty($_POST['uang_masuk']) ? 0: (int) $_POST['uang_masuk'];
     $keluar = empty($_POST['uang_keluar']) ? 0: (int) $_POST['uang_keluar'];
     $keterangan = empty(trim($_POST['ket_uang'] ?? '')) ? '-': trim($_POST['ket_uang']);
@@ -32,7 +42,10 @@ if(isset($_POST['operasi'])){
     } else {
         die("gagal insert uang kasss".$stmt1->error);
     }
+
+    $stmt1->close();
  }
+
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -113,13 +126,17 @@ if(isset($_POST['operasi'])){
     <section class="aktivitas">
          <h2>riwayat uang kas</h2>
          <div class="riwayat">
-             <span class="perTanggal">
-                 <h3>12/4</h3>
-                 <p>+ 10000 <!-- php neng rutinan sek tabel -->
-                     <br>
-                     - 5000 <!-- php neng kebutuhan sek tabel -->
-                 </p>
-             </span>
+
+         <?php 
+         while($row = $result2->fetch_assoc()){
+             echo"<span class='perTanggal'>
+                <h3>".$row['tanggal']."</h3>
+                <p>+ " .$row['kas_masuk']."<br>".
+                "- ".$row['kas_keluar']."<br>".
+                "total: ".$row['kas_total'].
+                 "</p>"."</span>";
+         };
+            ?>
          </div>
      </section>
 
