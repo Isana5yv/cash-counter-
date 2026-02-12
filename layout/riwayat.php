@@ -21,10 +21,11 @@ if(isset($_POST['operasi'])){
 
     $terakhir = $query -> fetch() ? (int) $kas_total : 0;
 
+    $query->close();
+
     $kas_total = $terakhir + $masuk - $keluar;
 
-    $stmt1 = $db->prepare("INSERT INTO uang_kelompok(id_users, kas_masuk, kas_keluar, kas_total, keterangan_users)
-     VALUES (?,?,?,?,?)");
+    $stmt1 = $db->prepare("INSERT INTO uang_kelompok(id_users, kas_masuk, kas_keluar, kas_total, keterangan_users) VALUES (?,?,?,?,?)");
     $stmt1-> bind_param("iiiis", $id_users, $masuk, $keluar, $kas_total, $keterangan);
     if($stmt1->execute()){
         echo "sip, berhasil insert uang kas";
