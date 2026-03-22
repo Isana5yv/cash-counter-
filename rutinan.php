@@ -8,8 +8,22 @@ $query->bind_param("i", $id_users);
 $query->execute();
 
 $result = $query->get_result();
+$data_anggota = $result->fetch_all(MYSQLI_ASSOC);
 
 $query->close();
+
+$hasil = [];
+foreach ($data_anggota as $row) {
+    $id_anggota = $row['id_aggota'];
+    $query2 = $db->prepare("SELECT uang_total FROM uang_anggota WHERE id_users = ? ORDER BY id_uang DESC");
+    $query2->bind_param("i", $id_users);
+    $query2->execute();
+    $all = $query2->get_result();
+    while ($data = $all->fetch_assoc()) {
+        $hasil[] = $data;
+    }
+    $query2->close();
+}
 
 if (isset($_POST['simpan'])) {
     $stmt1 = $db->prepare("INSERT INTO uang_anggota(id_anggota, id_users, uang_total) VALUES (?,?,?)");
@@ -71,13 +85,37 @@ if (isset($_POST['simpan'])) {
             <tbody>
                 <?php
                 $no = 1;
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>
-                <td>" . $no++ . "</td>
-                <td>" . $row['anggota'] . "</td>
-                <td><input type='number' name='kas_" . $row['id_aggota'] . "'></td>
-                </tr>";
-                }
+                $max_kolom = 0;
+                $data_uang = [];
+foreach ($data_anggota as $row) {
+
+    $id = $row['id_aggota'];
+    $list = $data_uang[$id] ?? [];
+
+    echo "<tr>";
+    echo "<td>" . $no++ . "</td>";
+    echo "<td>" . $row['anggota'] . "</td>";
+    echo "<td>$id</td>"; // id_anggota
+    echo "<td>$id_users</td>"; // id_users
+    echo "<td><input type='number' name='kas_$id'></td>";
+
+    // 🔥 kolom mengikuti data terbanyak
+   for ($i = 0; $i < $max_kolom; $i++) {
+
+        if (isset($list[$i])) {
+            echo "<td>" . $list[$i] . "</td>";
+        } else {
+            echo "<td style='background:red'></td>";
+        }
+
+    }
+
+    echo "</tr>";
+}
+
+echo "<pre>";
+print_r($data_uang);
+echo "</pre>";
                 ?>
             </tbody>
         </table>
