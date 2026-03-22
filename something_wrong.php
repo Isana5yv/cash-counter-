@@ -132,3 +132,20 @@ $result = $query->get_result();
 
 </body>
 
+$no = 1;
+                foreach ($data_anggota as $row) {
+                    echo "<tr>
+                <td>" . $no++ . "</td>
+                <td>" . $row['anggota'] . "</td>
+                <td><input type='number' name='kas_" . $row['id_aggota'] . "'></td>";
+
+                    echo "<td>" . $row['id_aggota'] . "<td></td>" . $id_users . "</td>";
+                    if (isset($data_uang[$id])) {
+                        echo implode(", ", $data_uang[$id]);
+                    } else {
+                        echo "0";
+                    }
+
+                    echo "</tr>";
+                }
+
