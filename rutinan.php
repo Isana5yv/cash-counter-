@@ -15,7 +15,7 @@ $query->close();
 $hasil = [];
 foreach ($data_anggota as $row) {
     $id_anggota = $row['id_aggota'];
-    
+
     $query2 = $db->prepare("SELECT uang_total FROM uang_anggota WHERE id_users = ? AND id_anggota = ? ORDER BY id_uang DESC");
     $query2->bind_param("ii", $id_users, $id_anggota);
     $query2->execute();
@@ -23,15 +23,19 @@ foreach ($data_anggota as $row) {
     //while ()
     $data = $all->fetch_all(MYSQLI_ASSOC); {
         $hasil[] = [$id_users, $id_anggota, $data];
-    //}
-    $query2->close();
-}}
+        //}
+        $query2->close();
+    }
+}
 
 if (isset($_POST['simpan'])) {
+    $total_kas = 0;
     $stmt1 = $db->prepare("INSERT INTO uang_anggota(id_anggota, id_users, uang_total) VALUES (?,?,?)");
     foreach ($result as $row) {
         $id_anggota = $row['id_aggota'];
-        $uang_total = $_POST['kas_' . $id_anggota];
+        $uang_total = $_POST['kas_' . $id_anggota] ?? 0;
+
+        $total_kas += $uang_total;
 
         $stmt1->bind_param("iii", $id_anggota, $id_users, $uang_total);
         if ($stmt1->execute()) {
@@ -42,10 +46,30 @@ if (isset($_POST['simpan'])) {
     }
 
     $stmt1->close();
+
+    $stmt2 = $db->prepare("INSERT INTO uang_kelompok(id_users, kas_masuk, kas_keluar, kas_total, keterangan_users) VALUES (?,?,?,?,?)");
+    $keterangan = "kas rutin bang";
+    $kas_keluar = 0;
+    $kas_masuk = $total_kas;
+    $kas_total = $db->prepare("SELECT kas_total FROM uang_kelompok WHERE id_users = ? ORDER BY id_tanggal DESC LIMIT 1");
+    $kas_total->bind_param("i", $id_users);
+    $kas_total->execute();
+    $kas_total->bind_result($sisa);
+    $sisa_terakhir = $kas_total->fetch() ? (int) $sisa : 0;
+    $kas_total->close();
+
+    $kas_baru = $sisa_terakhir + $kas_masuk;
+
+    $stmt2->bind_param("iiiis", $id_users, $kas_masuk, $kas_keluar, $kas_baru, $keterangan);
+    if ($stmt2->execute()) {
+        echo "kas kelompok sudah di insert";
+    } else {
+        die("gagal insert ke uang kelompok" . $stmt2->error);
+    }
 }
 echo "<pre>";
-                print_r($hasil);
-                echo "</pre>";
+print_r($hasil);
+echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -107,19 +131,20 @@ echo "<pre>";
                     // 🔥 kolom mengikuti data terbanyak
                     $ketemu = false;
 
-    foreach ($hasil as $h) {
-        if ($h[1] == $id) {
-            $ketemu = true;
+                    foreach ($hasil as $h) {
+                        if ($h[1] == $id) {
+                            $ketemu = true;
 
-            for ($i = 0; $i < $max_kolom; $i++) {
-                if (isset($h[2][$i])) {
-                    echo "<td>" . $h[2][$i]['uang_total'] . "</td>";
-                } else {
-                    // 🔴 kalau index ga ada
-                    echo "<td style='background:red'></td>";
-                }
-            }
-        }}
+                            for ($i = 0; $i < $max_kolom; $i++) {
+                                if (isset($h[2][$i])) {
+                                    echo "<td>" . $h[2][$i]['uang_total'] . "</td>";
+                                } else {
+                                    // 🔴 kalau index ga ada
+                                    echo "<td style='background:red'></td>";
+                                }
+                            }
+                        }
+                    }
 
                     echo "</tr>";
                 }
