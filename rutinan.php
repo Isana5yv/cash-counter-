@@ -38,10 +38,9 @@ if (isset($_POST['simpan'])) {
         $total_kas += $uang_total;
 
         $stmt1->bind_param("iii", $id_anggota, $id_users, $uang_total);
-        if ($stmt1->execute()) {
-            echo "sipppp" . $id_anggota . "berhasil diinsert<br>";
-        } else {
+        if (!$stmt1->execute()) {
             die("gagal" . $stmt1->error);
+            echo "<script>alert('gagal menyimpan kas rutin')</script>";
         };
     }
 
@@ -62,14 +61,11 @@ if (isset($_POST['simpan'])) {
 
     $stmt2->bind_param("iiiis", $id_users, $kas_masuk, $kas_keluar, $kas_baru, $keterangan);
     if ($stmt2->execute()) {
-        echo "kas kelompok sudah di insert";
+        echo "<script>alert('uang kelompok berhasil di insert')</script>";
     } else {
         die("gagal insert ke uang kelompok" . $stmt2->error);
     }
 }
-echo "<pre>";
-print_r($hasil);
-echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -127,8 +123,7 @@ echo "</pre>";
                     echo "<td>$id</td>"; // id_anggota
                     echo "<td>$id_users</td>"; // id_users
                     echo "<td><input type='number' name='kas_$id'></td>";
-
-                    // 🔥 kolom mengikuti data terbanyak
+                    
                     $ketemu = false;
 
                     foreach ($hasil as $h) {
@@ -139,7 +134,7 @@ echo "</pre>";
                                 if (isset($h[2][$i])) {
                                     echo "<td>" . $h[2][$i]['uang_total'] . "</td>";
                                 } else {
-                                    // 🔴 kalau index ga ada
+                                   
                                     echo "<td style='background:red'></td>";
                                 }
                             }
@@ -150,7 +145,7 @@ echo "</pre>";
                 }
 
                 //echo "<pre>";
-                //print_r($hasil[$data]);
+                //print_r($hasil);
                 //echo "</pre>";
                 ?>
             </tbody>

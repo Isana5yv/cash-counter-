@@ -149,3 +149,15 @@ $no = 1;
                     echo "</tr>";
                 }
 
+                for ($i =0; $i < $max_kolom; $i++) {
+
+                        if ($id == $hasil[$id_anggota] && $id_users == $hasil[$id_users]) {
+                            //foreach ($hasil[$uang_total as $data]) {
+                                echo "<td>" . //$list[$i]
+                            $hasil[$data] . "</td>";
+                            //}
+                        } else {
+                            echo "<td style='background:red'></td>";
+                        }
+                    }
+
