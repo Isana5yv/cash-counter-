@@ -5,7 +5,9 @@ $id_users = $_SESSION['id_users'];
 $stmt2 = $db->prepare("SELECT kas_masuk, kas_keluar, kas_total, keterangan_users, tanggal 
  FROM uang_kelompok 
  WHERE id_users = ?
- ORDER BY id_tanggal DESC");
+ ORDER BY id_tanggal DESC
+ LIMIT 10
+ ");
 
 $stmt2->bind_param("i", $id_users);
 $stmt2->execute();
@@ -133,12 +135,13 @@ if (isset($_POST['operasi'])) {
 
             <?php
             while ($row = $result2->fetch_assoc()) {
-                echo "<span class='perTanggal'>
-                <h3>" . $row['tanggal'] . "</h3>
-                <p>+ " . $row['kas_masuk'] . "<br>" .
+                echo "<span class='perTanggal'>";
+                echo "<p>" . $row['tanggal'] . "</p>";
+                echo "<h3>" . $row['kas_total'] . "</h3>";
+                echo "<p>+ " . $row['kas_masuk'] . "<br>" .
                     "- " . $row['kas_keluar'] . "<br>" .
-                    "total: " . $row['kas_total'] .
-                    "</p>" . "</span>";
+                    "</p>";
+                echo "</span>";
             };
             ?>
         </div>

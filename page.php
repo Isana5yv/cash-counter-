@@ -8,6 +8,17 @@ if (!isset($_SESSION['id_users'])) {
     exit;
 }
 
+$id_users = $_SESSION['id_users'];
+$stmt2 = $db->prepare("SELECT kas_total, tanggal 
+ FROM uang_kelompok 
+ WHERE id_users = ?
+ ORDER BY id_tanggal DESC
+ LIMIT 1
+ ");
+
+$stmt2->bind_param("i", $id_users);
+$stmt2->execute();
+$result2 = $stmt2->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -107,22 +118,27 @@ if (!isset($_SESSION['id_users'])) {
 
     <section class="entry" id="login">
         <div class="container" id="now">
-            <span id="tampilTanggal">aku waktu</span>
+            <?php
+            if ($result2->num_rows > 0) {
+                $row = $result2->fetch_assoc();
+                echo "<span>" . $row['tanggal'] . "</span>";
+                echo "<br>";
+                echo "<h2>" . $row['kas_total'] . "</h2>";
+            } else {
+                echo "data error";
+            }
+            ?>
             <!--dinggo fungsi waeeee gek neng php pertambahan uang kas kwi nganggo js sek-->
-            <br>
-            <span id="nomin">aku total uang</span>
         </div>
         <!--div 2 sek kanan ditambahi diagram progress-->
         <div class="container" id="target">
-            <span id="tujuan">aku kebutuhan</span>
-            <br>
-            <span id="tampilTujuan">list disini</span>
+            <h2>mau mulai kas hari ini?</h2>
+        <a href="rutinan.php"><button type="button">mulai!</button></a>
         </div>
     </section>
 
     <section class="go_to_rutinan">
-        <h2>mau mulai kas hari ini?</h2>
-        <a href="rutinan.php"><button type="button">mulai!</button></a>
+        
     </section>
 
     <section class="quotes">
@@ -132,6 +148,7 @@ if (!isset($_SESSION['id_users'])) {
     <?php include 'layout/riwayat.php' ?>
 
     <section class="pendahuluan">
+        <?php include 'layout/todo.php'; ?>
         <div class="text">
             <h2>website ini dibuat untuk memudahkan para bebdahara dalam membuat perhitungan uang walaupun belum sempurna</h2>
         </div>
