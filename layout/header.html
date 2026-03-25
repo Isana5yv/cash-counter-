@@ -8,11 +8,12 @@
 
     <style>
         nav {
-            background-color: aliceblue;
+            background-color: #bd2525;
             display: flex;
             width: 100%;
             height: 80px;
             justify-content: space-between;
+            color:antiquewhite;
         }
 
         nav ul {
@@ -33,7 +34,7 @@
             position: relative;
             top: 20px;
             border-radius: 10px;
-            background-color: lightsteelblue;
+            background-color: #e09a8e;
             list-style: none;
 
         }
@@ -44,17 +45,33 @@
             padding: 10px;
             text-align: center;
             text-decoration: none;
-            list-style-type: disc;
+            list-style-type: none;
             list-style-position: inside;
+            color: #2b2b2b;
+            /*border-bottom: 1px solid #3a3a3a;*/
+            text-shadow: none;
+            font-size: large;
+        }
+
+        hr{
+            border: none;
+            border-top:1px solid #bd2525;
+            width: 80%;
+            opacity: 0.8;
         }
 
         nav ul:hover {
             text-shadow: 2px 2px 4px gray;
-
+            color: #ffd700;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.5s;
         }
 
+        nav ul li a:hover{
+            font-size: larger;
+            transition: 0.3s;
+            color: #3a3a3a;
+        }
         nav ul:hover ul {
             display: block;
 
@@ -74,9 +91,9 @@
                         d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
                 </svg>
                 <ul>
-                    <li><a href="page.php">beranda</a></li>
-                    <li><a href="rutinan.php">kas rutin</a></li>
-                    <li><a href="urgent.php">dadakan</a></li>
+                    <li><a href="page.php">beranda</a></li><hr>
+                    <li><a href="rutinan.php">kas rutin</a></li><hr>
+                    <li><a href="urgent.php">dadakan</a></li><hr>
                     <li><a href="pengeluaran.php">pengeluaran</a></li>
                 </ul>
             </ul>

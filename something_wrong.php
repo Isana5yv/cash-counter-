@@ -161,14 +161,5 @@ $no = 1;
                         }
                     }
 
-                     echo "<input type='checkbox'
-            name='status[]'
-            value='" . $row['id'] . "'
-            onchange='this.form.submit()'
-            " . ($row['status'] ? 'checked' : '') . ">";
-
-                echo "<span class='" . ($row['status'] ? 'selesai' : '') . "'>"
-                    . $row['list'] .
-                    "</span>";
-                echo "<a href='?hapus=" . $row['id_list'] . "'>Hapus</a>";v
+                     cv
 

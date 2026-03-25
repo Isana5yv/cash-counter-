@@ -36,6 +36,7 @@ $result2 = $stmt2->get_result();
             display: inline-block;
             width: 100%;
             box-sizing: border-box;
+            background-color: #f3eed9;
         }
 
 
@@ -46,17 +47,22 @@ $result2 = $stmt2->get_result();
             margin-bottom: 0;
             justify-content: center;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: #2b2b2b;
+            text-shadow: 0 2px 10px #bd2525;
         }
 
-        header {
+        #real {
             height: 40vh;
         }
 
-        header h2 {
+        #real h2 {
             text-align: center;
             justify-content: center;
             margin-top: 10px;
+            margin: auto;
+            color: #3a3a3a;
         }
+        
 
         .entry {
             text-align: center;
@@ -95,6 +101,7 @@ $result2 = $stmt2->get_result();
             width: 100%;
             display: inline-block;
         }
+
         .text {
             width: 30%;
             text-align: end;
@@ -103,18 +110,31 @@ $result2 = $stmt2->get_result();
             margin: auto;
             margin-right: 10%;
         }
-
-        
     </style>
 </head>
 
 <body>
-<?php include 'layout/header.html' ?>
-    
-    <header>
+    <?php include 'layout/header.html' ?>
+
+    <section id="real">
         <h1>welcome to website</h1>
-        <h2>i hope you guys can make me feel <br> usefull by this website</h2>
-    </header>
+        <h2 id="typing"></h2>
+        <script>
+            const text = "I hope you guys can make me feel useful by this website!";
+const typingEl = document.getElementById("typing");
+let index = 0;
+
+function type() {
+  if(index < text.length) {
+    typingEl.textContent += text[index];
+    index++;
+    setTimeout(type, 100); // kecepatan 100ms per huruf
+  }
+}
+
+type();
+        </script>
+    </section>
 
     <section class="entry" id="login">
         <div class="container" id="now">
@@ -133,12 +153,12 @@ $result2 = $stmt2->get_result();
         <!--div 2 sek kanan ditambahi diagram progress-->
         <div class="container" id="target">
             <h2>mau mulai kas hari ini?</h2>
-        <a href="rutinan.php"><button type="button">mulai!</button></a>
+            <a href="rutinan.php"><button type="button">mulai!</button></a>
         </div>
     </section>
 
     <section class="go_to_rutinan">
-        
+
     </section>
 
     <section class="quotes">
@@ -154,7 +174,7 @@ $result2 = $stmt2->get_result();
         </div>
     </section>
 
-  <?php include 'layout/footer.html' ?>  
+    <?php include 'layout/footer.html' ?>
 </body>
 
 </html>
