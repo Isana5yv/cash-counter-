@@ -53,14 +53,33 @@ $result2 = $query2->get_result();
     <title>list kebutuhan kelas</title>
 
     <style>
-        
+         .todo {
+            background-color: #e09a8e;
+            padding: 30px;
+            width: 60%;
+            text-align: left;
+            justify-content: left;
+            margin: auto;
+            border-radius: 10px;
+            min-height: auto;
+            margin-bottom: 5em;
+        }
+
+        input {
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: red;
+        }
     </style>
 </head>
 
 <body>
     <div class="todo">
         <form action="page.php" method="post">
-            <label for="list">masukkan list</label>
+            <h2>to-do-buy</h2>
+            <label for="list">masukkan list</label><br>
             <input type="text" name="list" id="list" placeholder="ex: AC" required>
             <button type="submit" name="tambah">tambah</button>
             <br>

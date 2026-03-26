@@ -51,6 +51,10 @@ $result2 = $stmt2->get_result();
             text-shadow: 0 2px 10px #bd2525;
         }
 
+h2 {
+    font-size: 2em;
+}
+
         #real {
             height: 40vh;
         }
@@ -61,34 +65,56 @@ $result2 = $stmt2->get_result();
             margin-top: 10px;
             margin: auto;
             color: #3a3a3a;
+            font-size: 1.75em;
         }
         
 
         .entry {
-            text-align: center;
-            height: 40vh;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 50px;
+            /*height: 40vh;*/
         }
 
         #now,
         #target {
-            background-color: blueviolet;
+            background-color: #e09a8e;
             text-align: center;
             border-radius: 20px;
-            height: 30vh;
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
         #now {
-            width: 20%;
+            min-width: 20%;
+            max-width: 30%;
         }
 
         #target {
-            width: 50%;
+            min-width: 40%;
+            max-width: 50%;
+            text-align: left;
+            margin-left: 0;
         }
 
-        .quotes {
+#target h2{
+    font-size: 1.75em;
+    margin-top: 0;
+    color: #2b2b2b;
+}
+#now span{
+    color: #3a3a3a;
+}
+button{
+    size: 3em;
+    padding: 5px 10px;
+}
+       .quotes {
             height: 20vh;
             text-align: center;
             justify-content: center;
@@ -103,13 +129,14 @@ $result2 = $stmt2->get_result();
         }
 
         .text {
-            width: 30%;
+            width: 50%;
             text-align: end;
             justify-content: center;
             padding: 50px;
             margin: auto;
             margin-right: 10%;
         }
+    
     </style>
 </head>
 
@@ -121,18 +148,18 @@ $result2 = $stmt2->get_result();
         <h2 id="typing"></h2>
         <script>
             const text = "I hope you guys can make me feel useful by this website!";
-const typingEl = document.getElementById("typing");
-let index = 0;
+            const typingEl = document.getElementById("typing");
+            let index = 0;
 
-function type() {
-  if(index < text.length) {
-    typingEl.textContent += text[index];
-    index++;
-    setTimeout(type, 100); // kecepatan 100ms per huruf
-  }
-}
+            function type() {
+                if (index < text.length) {
+                    typingEl.textContent += text[index];
+                    index++;
+                    setTimeout(type, 100); // kecepatan 100ms per huruf
+                }
+            }
 
-type();
+            type();
         </script>
     </section>
 
@@ -142,7 +169,6 @@ type();
             if ($result2->num_rows > 0) {
                 $row = $result2->fetch_assoc();
                 echo "<span>" . $row['tanggal'] . "</span>";
-                echo "<br>";
                 echo "<h2>" . $row['kas_total'] . "</h2>";
             } else {
                 echo "data error";
@@ -157,18 +183,15 @@ type();
         </div>
     </section>
 
-    <section class="go_to_rutinan">
-
-    </section>
-
     <section class="quotes">
         <i>"barang siapa yang barangnya membawa barang"</i>
     </section>
 
     <?php include 'layout/riwayat.php' ?>
 
+    <?php include 'layout/todo.php' ?>
+
     <section class="pendahuluan">
-        <?php include 'layout/todo.php'; ?>
         <div class="text">
             <h2>website ini dibuat untuk memudahkan para bebdahara dalam membuat perhitungan uang walaupun belum sempurna</h2>
         </div>

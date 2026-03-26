@@ -60,41 +60,45 @@ if (isset($_POST['operasi'])) {
     <title>Document</title>
 
     <style>
+        
         .riwayat {
-            background-color: blueviolet;
-            width: 70%;
-            height: 50vh;
+            background-color: transparant;
+            width: 100%;
+            height: auto;
             text-align: center;
-            margin: auto;
+            padding-right: 20px;
         }
 
         .perTanggal {
-            background-color: blue;
+            background-color: #bd2525;
             display: inline-block;
-            width: 80px;
-            height: 100px;
             text-align: center;
-            padding: 10px;
-            padding-top: 0;
-            margin: auto;
-            border-radius: 7px;
+            padding: 0 10px;
+            margin-left: 30px;
+            margin-top: 20px;
+            border-radius: 10px;
+            height: auto;
+            width: auto;
         }
 
         .aktivitas {
-            min-height: 70vh;
-            width: 100%;
+            min-height: auto;
+            min-width: 60%;
+            max-width: 80%;
             text-align: center;
             justify-content: center;
             margin: auto;
+            margin-bottom: 10em;
         }
 
         .kebutuhan_tujuan {
-            background-color: aquamarine;
+            background-color: #e09a8e;
             padding: 30px;
-            width: 50%;
+            width: 60%;
             text-align: left;
             justify-content: left;
             margin: auto;
+            border-radius: 10px;
         }
 
         input {
@@ -104,6 +108,7 @@ if (isset($_POST['operasi'])) {
         p {
             color: red;
         }
+    
     </style>
 </head>
 
@@ -135,13 +140,13 @@ if (isset($_POST['operasi'])) {
 
             <?php
             while ($row = $result2->fetch_assoc()) {
-                echo "<span class='perTanggal'>";
+                echo "<div class='perTanggal'>";
                 echo "<p>" . $row['tanggal'] . "</p>";
                 echo "<h3>" . $row['kas_total'] . "</h3>";
                 echo "<p>+ " . $row['kas_masuk'] . "<br>" .
                     "- " . $row['kas_keluar'] . "<br>" .
                     "</p>";
-                echo "</span>";
+                echo "</div>";
             };
             ?>
         </div>
