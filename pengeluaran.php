@@ -19,6 +19,27 @@ $result2 = $stmt2->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>all pegeluaran</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f3eed9;
+        }
+       table {
+            margin: 20px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <?php include 'layout/header.html'; ?>

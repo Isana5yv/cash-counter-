@@ -120,8 +120,8 @@ if (isset($_POST['simpan'])) {
                     echo "<tr>";
                     echo "<td>" . $no++ . "</td>";
                     echo "<td>" . $row['anggota'] . "</td>";
-                    echo "<td>$id</td>"; // id_anggota
-                    echo "<td>$id_users</td>"; // id_users
+                    //echo "<td>$id</td>"; // id_anggota
+                    //echo "<td>$id_users</td>"; // id_users
                     echo "<td><input type='number' name='kas_$id'></td>";
                     
                     $ketemu = false;
@@ -135,7 +135,7 @@ if (isset($_POST['simpan'])) {
                                     echo "<td>" . $h[2][$i]['uang_total'] . "</td>";
                                 } else {
                                    
-                                    echo "<td style='background:red'></td>";
+                                    echo "<td style='background:#ffffff'></td>";
                                 }
                             }
                         }

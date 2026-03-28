@@ -29,6 +29,10 @@ $result2 = $stmt2->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@449&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -36,19 +40,34 @@ $result2 = $stmt2->get_result();
             display: inline-block;
             width: 100%;
             box-sizing: border-box;
-            background-color: #f3eed9;
+            background-color: #f8fafc;
+  font-family: 'Nunito', sans-serif;
+  color: #1f2937;
         }
 
+        button {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
 
+button:hover {
+  background: #dc2626;
+}
         h1 {
             text-align: center;
             padding-top: 40px;
             font-size: 3em;
-            margin-bottom: 0;
+            margin-bottom: 10px;
             justify-content: center;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
             color: #2b2b2b;
-            text-shadow: 0 2px 10px #bd2525;
         }
 
 h2 {
@@ -56,7 +75,7 @@ h2 {
 }
 
         #real {
-            height: 40vh;
+            height: 45vh;
         }
 
         #real h2 {
@@ -65,7 +84,8 @@ h2 {
             margin-top: 10px;
             margin: auto;
             color: #3a3a3a;
-            font-size: 1.75em;
+            font-size: 1.5em;
+            width: 40%;
         }
         
 
@@ -79,7 +99,8 @@ h2 {
 
         #now,
         #target {
-            background-color: #e09a8e;
+            background-color: white;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
             text-align: center;
             border-radius: 20px;
             padding: 25px 0;
@@ -87,7 +108,7 @@ h2 {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 70px;
         }
 
         #now {
@@ -96,7 +117,7 @@ h2 {
         }
 
         #target {
-            min-width: 40%;
+            min-width: 35%;
             max-width: 50%;
             text-align: left;
             margin-left: 0;
@@ -115,7 +136,8 @@ button{
     padding: 5px 10px;
 }
        .quotes {
-            height: 20vh;
+            height: auto;
+            margin-bottom: 120px;
             text-align: center;
             justify-content: center;
             padding-top: 50px;
@@ -135,6 +157,7 @@ button{
             padding: 50px;
             margin: auto;
             margin-right: 10%;
+  font-family: 'DM Serif Display', serif;
         }
     
     </style>

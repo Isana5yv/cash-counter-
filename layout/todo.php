@@ -54,24 +54,40 @@ $result2 = $query2->get_result();
 
     <style>
          .todo {
-            background-color: #e09a8e;
-            padding: 30px;
             width: 60%;
             text-align: left;
             justify-content: left;
             margin: auto;
             border-radius: 10px;
             min-height: auto;
-            margin-bottom: 5em;
+            margin-bottom: 100px;
         }
 
-        input {
-            margin-bottom: 10px;
+        #list{
+            margin-bottom: 20px;
+            margin-top: 20px;
+            margin-right: 10px;
+            box-shadow: 2px 2px 5px #3a3a3a;
+            border-radius: 5px;
+            height: 2em;
+            border: none;
         }
 
-        p {
-            color: red;
+        #peritem{
+            width: 150px;
+            margin-top: 0;
         }
+        td{
+            margin: auto;
+            padding: auto;
+        }
+         input[type='checkbox']{
+            margin-bottom: 0;
+         }
+
+         a{
+            color: #ef4444;
+         }
     </style>
 </head>
 
@@ -79,30 +95,32 @@ $result2 = $query2->get_result();
     <div class="todo">
         <form action="page.php" method="post">
             <h2>to-do-buy</h2>
-            <label for="list">masukkan list</label><br>
+            <label for="list">masukkan list kebutuhan kelasmu!</label><br>
             <input type="text" name="list" id="list" placeholder="ex: AC" required>
             <button type="submit" name="tambah">tambah</button>
-            <br>
+            <table>
             <?php
             while ($row = $result2->fetch_assoc()) {
                 echo "<form method='POST' style='display:inline'>
                 <input type='hidden' name='id_list' value='" . $row['id_list'] . "'>
 
-                <input type='checkbox'
+                <tr><td><input type='checkbox' id='cekbok'
                 name='status'
                 value='1'
                 onchange='this.form.submit()'
                     " . ($row['status'] ? 'checked' : '') . ">";
-
+                    echo "</td><td id='peritem'>";
                 //echo "<span class='" . ($row['status'] ? 'selesai' : '') . "'>"
                 //. 
-                echo $row['list'];
+                echo "<label for='cekbok'>" . $row['list'] . "</label>";
                 //"</span>";
-                echo "<a href='?hapus=" . $row['id_list'] . "'>Hapus</a>";
+                echo "</td><td>";
+                echo "<a style='color: #ef4444' href='?hapus=" . $row['id_list'] . "'>Hapus</a>
+                </td></tr>";
                 echo "</form>";
-                echo "<br>";
             }
             ?>
+            </table>
         </form>
     </div>
 </body>

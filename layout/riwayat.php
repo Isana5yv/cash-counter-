@@ -60,22 +60,34 @@ if (isset($_POST['operasi'])) {
     <title>Document</title>
 
     <style>
+
+        .riwayatph{
+            display: flex;
+            gap: 25px;
+            width: 80%;
+            margin: auto;
+            text-align: top center;
+        }
         
         .riwayat {
             background-color: transparant;
-            width: 100%;
-            height: auto;
+            width: 320px;
+            height: 180px;
             text-align: center;
-            padding-right: 20px;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            overflow-y: auto;
+            gap: 10px;
         }
 
         .perTanggal {
-            background-color: #bd2525;
+            background: #fee2e2;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
             display: inline-block;
             text-align: center;
             padding: 0 10px;
-            margin-left: 30px;
-            margin-top: 20px;
+            /*margin-left: 30px;
+            margin-top: 20px;*/
             border-radius: 10px;
             height: auto;
             width: auto;
@@ -83,76 +95,81 @@ if (isset($_POST['operasi'])) {
 
         .aktivitas {
             min-height: auto;
-            min-width: 60%;
-            max-width: 80%;
-            text-align: center;
-            justify-content: center;
+            text-align: left;
             margin: auto;
-            margin-bottom: 10em;
+            margin-top: 0;
         }
 
         .kebutuhan_tujuan {
-            background-color: #e09a8e;
-            padding: 30px;
-            width: 60%;
+
             text-align: left;
             justify-content: left;
             margin: auto;
-            border-radius: 10px;
+            margin-bottom: 100px;
+           
         }
-
+        .kebutuhan {
+        background-color: white;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            padding: 30px;
+             border-radius: 10px;
+        }
         input {
             margin-bottom: 10px;
+            width: 200px;
         }
 
         p {
             color: red;
         }
+
+        input[type="checkbox"]{
+            width: auto;
+        }
     
     </style>
 </head>
 
-<body>
-    <section class="kebutuhan_tujuan">
+<section class="riwayatph">
+    <div class="kebutuhan_tujuan">
         <div class="kebutuhan">
-            <h2>pemasukan dan pengeluaran</h2>
-            <p>*kamu bisa mencatat pemasukan dan pengeluaran uang kas disini</p>
+            <h2 style="margin-top: 0; margin-bottom: 10px;">pemasukan dan pengeluaran</h2>
+            <p style="margin-top: 0;margin-bottom: 30px;">*kamu bisa mencatat pemasukan dan pengeluaran uang kas disini</p>
             <form action="page.php" method="post">
-                <label for="pemasukan">pemasukan:</label>
-                <input type="number" name="uang_masuk" id="uang_masuk">
-                <br>
-                <label for="pengeluaran">pengeluaran:</label>
-                <input type="number" name="uang_keluar" id="uang_keluar">
-                <br>
-                <label for="ket_uang">keterangan:</label>
-                <input type="text" name="ket_uang" id="keterangan_uang" placeholder="example: beli sapu dan dapat uang hilang">
-                <button type="submit" name="operasi" id="operasi">submit</button>
+                <table>
+                <tr><td><label for="pemasukan">pemasukan:</label></td><td>
+                <input style="margin-bottom: 0;" type="number" name="uang_masuk" id="uang_masuk"></td></tr>
+                <tr><td ><label for="pengeluaran">pengeluaran:</label></td><td>
+                <input style="margin-bottom: 0;" type="number" name="uang_keluar" id="uang_keluar"></td></tr>
+                
+                <tr><td ><label for="ket_uang">keterangan:</label></td><td>
+                <input style="margin-bottom: 0;" type="text" name="ket_uang" id="keterangan_uang" placeholder="example: beli sapu dan dapat uang hilang"></td></tr>
+</table><button type="submit" name="operasi" id="operasi">submit</button>
                 <p>sisa uang kamu adalah:</p>
                 <span id="sisa_uang"></span><!--nomin.textContent - uang_keluar.value + uang_masuk.value-->
                 <input type="hidden" name="sisa_uang" id="sisa_uang_input">
             </form>
         </div>
-    </section>
+</div>
 
-    <section class="aktivitas">
-        <h2>riwayat uang kas</h2>
+    <div class="aktivitas">
+        <h2 style="margin-bottom: 30px; margin-left: 30px;">riwayat uang kas</h2>
         <div class="riwayat">
 
             <?php
             while ($row = $result2->fetch_assoc()) {
                 echo "<div class='perTanggal'>";
-                echo "<p>" . $row['tanggal'] . "</p>";
+                echo "<p style='color: #3a3a3a'>" . $row['tanggal'] . "</p>";
                 echo "<h3>" . $row['kas_total'] . "</h3>";
-                echo "<p>+ " . $row['kas_masuk'] . "<br>" .
-                    "- " . $row['kas_keluar'] . "<br>" .
+                echo "<p style='color: green;margin-bottom:0;'>+ " . $row['kas_masuk'] . "<p style='color: #ef4444;margin-top:0;'>- " . $row['kas_keluar'] . "<br>" .
                     "</p>";
                 echo "</div>";
             };
             ?>
         </div>
-    </section>
+</div>
 
 
-</body>
+</section>
 
 </html>
