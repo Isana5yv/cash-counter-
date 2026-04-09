@@ -60,74 +60,165 @@ if (isset($_POST['operasi'])) {
     <title>Document</title>
 
     <style>
+        
+        body {
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f8fafc;
+  font-family: 'Nunito', sans-serif;
+  color: #1f2937;
+        }
 
-        .riwayatph{
-            display: flex;
-            gap: 25px;
-            width: 80%;
+        button {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #dc2626;
+}
+        h1 {
+            text-align: center;
+            padding-top: 40px;
+            font-size: 3em;
+            margin-bottom: 10px;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #2b2b2b;
+        }
+
+h2 {
+    font-size: 2em;
+}
+
+        #real h2 {
+            text-align: center;
+            justify-content: center;
+            margin-top: 10px;
             margin: auto;
-            text-align: top center;
+            color: #3a3a3a;
+            font-size: 1.5em;
+            width: 40%;
         }
         
-        .riwayat {
-            background-color: transparant;
-            width: 320px;
-            height: 180px;
-            text-align: center;
-            display: grid;
-            grid-template-columns: repeat(2,1fr);
-            overflow-y: auto;
-            gap: 10px;
+        #real {
+            margin-bottom: 120px;
+        }
+        
+
+        .entry {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            /*height: 40vh;*/
         }
 
-        .perTanggal {
-            background: #fee2e2;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-            display: inline-block;
+        #now,
+        #target {
+            background-color: white;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
             text-align: center;
-            padding: 0 10px;
-            /*margin-left: 30px;
-            margin-top: 20px;*/
-            border-radius: 10px;
+            border-radius: 20px;
+            padding: 25px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 70px;
+        }
+
+        #now {
+            min-width: 20%;
+            max-width: 30%;
+        }
+
+        #target {
+            min-width: 60%;
+            max-width: 90%;
+            text-align: left;
+            margin-left: 0;
+        }
+
+#target h2{
+    font-size: 1.75em;
+    margin-top: 0;
+    color: #2b2b2b;
+}
+#now span{
+    color: #3a3a3a;
+}
+button{
+    size: 3em;
+    padding: 5px 10px;
+}
+       .quotes {
             height: auto;
-            width: auto;
+            margin-bottom: 120px;
+            text-align: center;
+            justify-content: center;
+            padding-top: 50px;
+            font-size: x-large;
         }
 
-        .aktivitas {
-            min-height: auto;
-            text-align: left;
+        .pendahuluan {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 120px;
+        }
+
+        .text {
+            width: 50%;
+            text-align: end;
+            justify-content: center;
+            padding: 50px;
             margin: auto;
-            margin-top: 0;
+            margin-right: 10%;
+  font-family: 'DM Serif Display', serif;
         }
 
-        .kebutuhan_tujuan {
-
-            text-align: left;
-            justify-content: left;
-            margin: auto;
-            margin-bottom: 100px;
-           
-        }
-        .kebutuhan {
-        background-color: white;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-            padding: 30px;
-             border-radius: 10px;
-        }
-        input {
-            margin-bottom: 10px;
-            width: 200px;
-        }
-
-        p {
-            color: red;
-        }
-
-        input[type="checkbox"]{
-            width: auto;
-        }
+@media (max-width: 768px) {
+    #real h2 {
+        width: 80%;
+        font-size: 1.3em;
+    }
+    .entry{
+        gap: 0px;
+        justify-content: center;
+    }
     
-    </style>
+    #now, #target{
+        margin-bottom: 120px;
+    }
+    #now {
+       min-width: 60%;
+        max-width: 70%;
+        margin-bottom: 60px;
+        margin-left: 0;
+    }
+    #target{
+        min-width:100%;
+        border-radius: 0;
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
+    }
+    .text {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+}
+</style>
 </head>
 
 <section class="riwayatph">

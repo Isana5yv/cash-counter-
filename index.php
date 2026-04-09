@@ -31,11 +31,16 @@ if (isset($_POST['login'])) {
     <title>kelola kas</title>
 
     <style>
-        body {
+       body {
             padding: 0;
             margin: 0;
-            height: 90vh;
             background: linear-gradient(to bottom, #f3eed9 0%, #ff99cc 100%);
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;          
+            justify-content: center;
         }
 
         .form_login {
@@ -45,12 +50,10 @@ if (isset($_POST['login'])) {
             border-radius: 80px 8px;
             box-shadow: 0 0 10px #bd2525, 0 0 20px #bd2525, 0 0 30px #bd2525;
             width: 50%;
-            height: auto;
-            align-items: center;
-            text-align: center;
+            align-items: center;          
             justify-content: center;
-            margin: auto;
-            margin-top: 100px;
+            text-align: center;
+            
             font-size: large;
         }
 
@@ -58,18 +61,18 @@ if (isset($_POST['login'])) {
             margin-top: 15px;
             padding: 8px 15px;
             outline: none;
-            background: #f3eed9;
-            color: #798897;
+            background: white;
+            color: #bd2525;
+            font-weight: 600;
             border-radius: 10px;
             border: 2px solid #e09a8e;
         }
 
         .form_login button:hover {
-            background-color: #dbdacc;
-            color: #bd2525;
+            color: #e09a8e;
             scale: 1.1;
-            box-shadow: 2px 3px 10px #f3eed9;
-            transition: 0.5s ease;
+            box-shadow: 0 0 5px #f3eed9;
+            transition: 0.2s ease;
         }
 
         h1 {
@@ -77,7 +80,7 @@ if (isset($_POST['login'])) {
         }
 
         p a {
-            color: #e09a8e;
+            color: #ffe5e5;
             transition: 0.5s ease;
         }
 
@@ -97,10 +100,11 @@ if (isset($_POST['login'])) {
             width: 100%;
             border-radius: 7px;
             margin-top: 10px;
+            margin-bottom: 15px;
             padding: 10px;
             outline: none;
             border: 2px solid #e09a8e;
-            background: #f3eed9;
+            background: white;
         }
 
         .floatinglabel label {
@@ -109,7 +113,7 @@ if (isset($_POST['login'])) {
             left: 10px;
             top: 19px;
             color: #798897;
-            background: #f3eed9;
+            background: white;
             transition: 0.2s ease;
             border-radius: 7px;
             padding: 0 4px;
@@ -120,32 +124,42 @@ if (isset($_POST['login'])) {
             top: -3px;
             left: -1px;
             color: #bd2525;
-            background: #f3eed9;
+            background: white;
             border: 2px solid #e09a8e;
         }
+
+@media (max-width: 768px) {
+    .form_login {
+        width: 80%;
+        padding-top: 20px;
+        padding-bottom: 25px;
+        
+    }
+
+}
+    
     </style>
 </head>
 
 <body>
-    <div class="login_page">
+    
         <div class="form_login">
             <h1> selamat datang!</h1>
             <form action="" method="POST">
                 <div class="floatinglabel">
                     <input type="text" id="atasnama" placeholder="  " name="users_login" required>
-                    <label for="atasnama">atas nama</label>
+                    <label for="atasnama">username</label>
                 </div>
-                <br>
+
                 <div class="floatinglabel">
                     <input type="password" name="password" id="sandi" placeholder="  " required>
                     <label for="sandi">password</label>
                 </div>
-                <br>
                 <button name="login" type="submit">login</button>
             </form>
             <p><a href="loginkas.php">belum punya akun?daftar disini</a></p>
         </div>
-    </div>
+    
 
 
 </body>

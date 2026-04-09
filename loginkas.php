@@ -4,15 +4,15 @@ session_start();
 var_dump($_POST);
 include "service/database.php";
 
-if(!isset($_SESSION['step'])) {
+if (!isset($_SESSION['step'])) {
     $_SESSION['step'] = 1;
 } else {
-    if($_SESSION['step'] > 2) {
+    if ($_SESSION['step'] > 2) {
         $_SESSION['step'] = 1;
     }
 }
 $step = $_SESSION['step'];
-if(isset($_POST['submit1'])){
+if (isset($_POST['submit1'])) {
     $users = $_POST['users'];
     $sandi = ($_POST['sandi']);
     $nomorhp = $_POST['hp'];
@@ -27,12 +27,12 @@ if(isset($_POST['submit1'])){
 
     $_SESSION['id_users'] = $stmt1->insert_id;
     $_SESSION['step'] = 2;
-    header("Location:".$_SERVER['PHP_SELF']);
+    header("Location:" . $_SERVER['PHP_SELF']);
     exit();
 };
 
-if(isset($_POST['submit'])){
-    if(!isset($_SESSION['id_users'])) {
+if (isset($_POST['submit'])) {
+    if (!isset($_SESSION['id_users'])) {
         die("SESSION id_users hilang, ulangi dari Form 1");
     }
     $id_users = $_SESSION['id_users'];
@@ -42,13 +42,13 @@ if(isset($_POST['submit'])){
 
     try {
 
-        if(isset($_POST['nama']) && is_array($_POST['nama'])){
+        if (isset($_POST['nama']) && is_array($_POST['nama'])) {
 
             $stmt = $db->prepare("INSERT INTO daftar_anggota(id_users, anggota) VALUES (?, ?)");
 
             foreach ($_POST['nama'] as $nama) {
 
-                if(!empty($nama)){
+                if (!empty($nama)) {
                     $stmt->bind_param("is", $id_users, $nama);
                     if ($stmt->execute()) {
                         echo "daftar anggota berhasil diinsert";
@@ -60,14 +60,14 @@ if(isset($_POST['submit'])){
         }
         $stmt2 = $db->prepare("INSERT INTO uang_kelompok(id_users, kas_total) VALUES (?, ?)");
         $stmt2->bind_param("ii", $id_users, $awal);
-        if($stmt2->execute()){
+        if ($stmt2->execute()) {
             echo "uang kelompok berhasil diinsert";
         } else {
             die("uang kelompok gagal" . $stmt2->error);
         }
 
         $db->commit();
-        echo "BERHASIL BROKKK";
+        echo "BERHASIL BROOOO, sekarang silakan refresh halaman ini dan login dengan akun yang sudah dibuat ";
     } catch (Exception $e) {
         $db->rollback();
         die("gagal brokkk" . $e->getMessage());
@@ -87,10 +87,13 @@ if(isset($_POST['submit'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login page, coba coba</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         * {
             padding: 0;
-            margin: 10px;
+            margin: 0;
             box-sizing: border-box;
         }
 
@@ -102,6 +105,21 @@ if(isset($_POST['submit'])){
             margin-top: 50px;
             margin-bottom: 50px;
             font-size: larger;
+        }
+
+        button {
+            padding: 10px 18px;
+            /* lebih lega */
+            border: none;
+            border-radius: 8px;
+            background-color: #bd2525;
+            color: #ffffff;
+            /* lebih jelas dari cream */
+            cursor: pointer;
+            font-weight: 500;
+            margin: 20px auto;
+            text-align: center;
+            transition: all 0.25s ease;
         }
 
         input {
@@ -129,16 +147,56 @@ if(isset($_POST['submit'])){
         .row {
             margin-bottom: 10px;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 70%;
+            }
+
+            input {
+                width: 90%;
+            }
+
+            #submit1, #submit {
+                width: 50%;
+                margin: 20px 25%;
+            }
+
+            .choose {
+                width: 35%;
+                 background-color: #f3eed9;
+                color: #2f2f3a;
+                box-shadow: 2px 2px 5px #2f2f3a;
+                margin: 35px 6%;
+                padding: 10px 5px;
+               /* border-radius: 50px;*/
+            }
+            
+            .choose:hover{
+                background-color: #e09a8e;
+            }
+
+             .row input {
+                width: 80%;
+                padding: 5px;
+            }
+            
+            .row button{
+                margin-left: 10px;
+                 font-size: 1.1em;
+                padding: 5px 5px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <?php if($step == 1): ?>
+        <?php if ($step == 1): ?>
             <form action="loginkas.php" method="post" id="form1">
 
                 <fieldset>
-                    <label for="their_name">atas nama</label><br>
+                    <label for="their_name">username</label><br>
                     <input type="text" name="users" id="their_name" required>
                 </fieldset>
                 <fieldset>
@@ -153,13 +211,13 @@ if(isset($_POST['submit'])){
 
             </form>
 
-        <?php elseif($step == 2): ?>
+        <?php elseif ($step == 2): ?>
             <form action="loginkas.php" method="post" id="form2">
 
                 <fieldset>
-                    <label>keperluan pribadi/kelompok</label><br>
-                    <button type="button" id="yourself">pribadi</button><br>
-                    <button type="button" id="other">kelompok</button>
+                    <label>keperluan pribadi/kelompok?</label><br>
+                    <button type="button" id="yourself" class="choose">pribadi</button>
+                    <button type="button" id="other" class="choose">kelompok</button>
                 </fieldset>
                 <div id="kelompok" class="hidden">
                     <fieldset>
@@ -168,13 +226,11 @@ if(isset($_POST['submit'])){
                         <div id="tabel_input">
                             <!--iki tabel input e-->
                         </div>
-                        <button type="button" id="tambah_input">+</button>
-                        <p>*lebihkan 1 nama random untuk mengukur pendapatan seharusnya</p>
+                        <p>*klik tanda plus (+) dibawah ini</p>
+                        <button type="button" id="tambah_input"><i class="fas fa-plus"></i></button>
+
                     </fieldset>
-                    <fieldset>
-                        <label for="nominal">nominal per-orang</label><br>
-                        <input type="number" name="nominal" id="nominal" required>
-                    </fieldset>
+
                     <fieldset>
                         <label for="awal">jumlah kas sekarang</label><br>
                         <input type="number" name="awal" id="awal" required>
@@ -191,7 +247,7 @@ if(isset($_POST['submit'])){
 
                 <script>
                     // document.getElementById('submit1').addEventListener('click', function() {
-                       // document.getElementById('form2').style.display = 'block';
+                    // document.getElementById('form2').style.display = 'block';
                     //}) ;
 
                     const pribadi = document.getElementById('yourself');
@@ -225,7 +281,7 @@ if(isset($_POST['submit'])){
 
                         const hapus = document.createElement('button');
                         hapus.type = 'button';
-                        hapus.textContent = 'x';
+                        hapus.innerHTML = '<i class="fas fa-trash"></i>';
                         hapus.addEventListener('click', function() {
                             row.remove();
                         })
@@ -237,7 +293,7 @@ if(isset($_POST['submit'])){
 
                     })
                 </script>
-                <button type="submit" name="submit">submit!</button>
+                <button type="submit" name="submit" id="submit">submit!</button>
             </form>
         <?php endif; ?>
     </div>
