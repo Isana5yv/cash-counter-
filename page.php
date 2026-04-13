@@ -30,8 +30,8 @@ $result2 = $stmt2->get_result();
     <title>home</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@449&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@449&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -41,23 +41,24 @@ $result2 = $stmt2->get_result();
             width: 100%;
             box-sizing: border-box;
             background-color: #f8fafc;
-  font-family: 'Nunito', sans-serif;
-  color: #1f2937;
+            font-family: 'Nunito', sans-serif;
+            color: #1f2937;
         }
 
         button {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.2s;
-}
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-button:hover {
-  background: #dc2626;
-}
+        button:hover {
+            background: #dc2626;
+        }
+
         h1 {
             text-align: center;
             padding-top: 40px;
@@ -70,12 +71,8 @@ button:hover {
             color: #2b2b2b;
         }
 
-h2 {
-    font-size: 2em;
-}
-
-        #real {
-            height: 45vh;
+        h2 {
+            font-size: 2em;
         }
 
         #real h2 {
@@ -87,7 +84,11 @@ h2 {
             font-size: 1.5em;
             width: 40%;
         }
-        
+
+        #real {
+            margin-bottom: 120px;
+        }
+
 
         .entry {
             display: flex;
@@ -100,7 +101,7 @@ h2 {
         #now,
         #target {
             background-color: white;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.05);
             text-align: center;
             border-radius: 20px;
             padding: 25px 0;
@@ -117,25 +118,28 @@ h2 {
         }
 
         #target {
-            min-width: 35%;
-            max-width: 50%;
+            min-width: 60%;
+            max-width: 90%;
             text-align: left;
             margin-left: 0;
         }
 
-#target h2{
-    font-size: 1.75em;
-    margin-top: 0;
-    color: #2b2b2b;
-}
-#now span{
-    color: #3a3a3a;
-}
-button{
-    size: 3em;
-    padding: 5px 10px;
-}
-       .quotes {
+        #target h2 {
+            font-size: 1.75em;
+            margin-top: 0;
+            color: #2b2b2b;
+        }
+
+        #now span {
+            color: #3a3a3a;
+        }
+
+        button {
+            size: 3em;
+            padding: 5px 10px;
+        }
+
+        .quotes {
             height: auto;
             margin-bottom: 120px;
             text-align: center;
@@ -145,9 +149,9 @@ button{
         }
 
         .pendahuluan {
-            height: 70vh;
             width: 100%;
             display: inline-block;
+            margin-bottom: 120px;
         }
 
         .text {
@@ -157,9 +161,45 @@ button{
             padding: 50px;
             margin: auto;
             margin-right: 10%;
-  font-family: 'DM Serif Display', serif;
+            font-family: 'DM Serif Display', serif;
         }
-    
+
+        @media (max-width: 768px) {
+            #real h2 {
+                width: 80%;
+                font-size: 1.3em;
+            }
+
+            .entry {
+                gap: 0px;
+                justify-content: center;
+            }
+
+            #now,
+            #target {
+                margin-bottom: 120px;
+            }
+
+            #now {
+                min-width: 60%;
+                max-width: 70%;
+                margin-bottom: 60px;
+                margin-left: 0;
+            }
+
+            #target {
+                min-width: 100%;
+                border-radius: 0;
+                box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.05);
+            }
+
+            .text {
+                width: 80%;
+                margin: auto;
+                text-align: center;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 
